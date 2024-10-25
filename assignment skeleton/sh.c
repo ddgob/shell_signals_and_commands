@@ -76,7 +76,9 @@ runcmd(struct cmd *cmd)
     /* MARK START task2
      * TAREFA2: Implemente codigo abaixo para executar
      * comandos simples. */
-    fprintf(stderr, "exec nao implementado\n");
+    if (execvp(ecmd->argv[0], ecmd->argv) < 0) {
+      fprintf(stderr, "erro: comando não encontrado: %s\n", ecmd->argv[0]);
+    }
     /* MARK END task2 */
     break;
 
