@@ -88,7 +88,18 @@ runcmd(struct cmd *cmd)
     /* MARK START task3
      * TAREFA3: Implemente codigo abaixo para executar
      * comando com redirecionamento. */
-    fprintf(stderr, "redir nao implementado\n");
+    int file_descrpt = open(rcmd->file, rcmd->mode, S_IRWXU);
+    if (file_descrpt < 0) {
+        perror("open");
+        exit(1);
+    }
+
+    if (dup2(file_descrpt, rcmd->fd) < 0) {
+        perror("dup2");
+        exit(1);
+    }
+
+    close(file_descrpt);
     /* MARK END task3 */
     runcmd(rcmd->cmd);
     break;
