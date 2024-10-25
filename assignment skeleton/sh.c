@@ -109,10 +109,40 @@ runcmd(struct cmd *cmd)
     /* MARK START task4
      * TAREFA4: Implemente codigo abaixo para executar
      * comando com pipes. */
-    fprintf(stderr, "pipe nao implementado\n");
+     if (pipe(p) < 0) {
+        perror("pipe");
+        exit(1);
+    }
+
+    // Fork for the left side of the pipe
+    if (fork1() == 0) {
+      close(p[0]);
+      if (dup2(p[1], STDOUT_FILENO) < 0) {
+        perror("dup2");
+        exit(1);
+      }
+      close(p[1]);
+      runcmd(pcmd->left);
+    }
+
+    // Fork for the right side of the pipe
+    if (fork1() == 0) {
+      close(p[1]);
+      if (dup2(p[0], STDIN_FILENO) < 0) {
+        perror("dup2");
+        exit(1);
+      }
+      close(p[0]);
+      runcmd(pcmd->right);
+    }
+
+    close(p[0]);
+    close(p[1]);
+    wait(&r);
+    wait(&r);
     /* MARK END task4 */
     break;
-  }    
+  }
   exit(0);
 }
 
