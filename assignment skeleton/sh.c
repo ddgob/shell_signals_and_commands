@@ -134,7 +134,7 @@ main(void)
     if(buf[0] == 'c' && buf[1] == 'd' && buf[2] == ' '){
       buf[strlen(buf)-1] = 0;
       if(chdir(buf+3) < 0)
-        fprintf(stderr, "reporte erro\n");
+        fprintf(stderr, "erro: não foi possível mudar para o diretório %s\n", buf+3);
       continue;
     }
     /* MARK END task1 */
