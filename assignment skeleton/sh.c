@@ -90,13 +90,13 @@ runcmd(struct cmd *cmd)
      * comando com redirecionamento. */
     int file_descrpt = open(rcmd->file, rcmd->mode, S_IRWXU);
     if (file_descrpt < 0) {
-        perror("open");
-        exit(1);
+      perror("open");
+      exit(1);
     }
 
     if (dup2(file_descrpt, rcmd->fd) < 0) {
-        perror("dup2");
-        exit(1);
+      perror("dup2");
+      exit(1);
     }
 
     close(file_descrpt);
@@ -109,12 +109,12 @@ runcmd(struct cmd *cmd)
     /* MARK START task4
      * TAREFA4: Implemente codigo abaixo para executar
      * comando com pipes. */
-     if (pipe(p) < 0) {
-        perror("pipe");
-        exit(1);
+    if (pipe(p) < 0) {
+      perror("pipe");
+      exit(1);
     }
 
-    // Fork for the left side of the pipe
+    // Fork the first process (left side of the pipe)
     if (fork1() == 0) {
       close(p[0]);
       if (dup2(p[1], STDOUT_FILENO) < 0) {
@@ -125,7 +125,7 @@ runcmd(struct cmd *cmd)
       runcmd(pcmd->left);
     }
 
-    // Fork for the right side of the pipe
+    // Fork the second process (right side of the pipe)
     if (fork1() == 0) {
       close(p[1]);
       if (dup2(p[0], STDIN_FILENO) < 0) {
@@ -138,6 +138,7 @@ runcmd(struct cmd *cmd)
 
     close(p[0]);
     close(p[1]);
+
     wait(&r);
     wait(&r);
     /* MARK END task4 */
