@@ -123,6 +123,7 @@ runcmd(struct cmd *cmd)
       }
       close(p[1]);
       runcmd(pcmd->left);
+      exit(0);
     }
 
     // Fork the second process (right side of the pipe)
@@ -134,6 +135,7 @@ runcmd(struct cmd *cmd)
       }
       close(p[0]);
       runcmd(pcmd->right);
+      exit(0);
     }
 
     close(p[0]);
