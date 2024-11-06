@@ -1,4 +1,5 @@
 # Trabalho Prático 1: Shell + TOP + Sinais
+- [Para acessar a documentação e obter mais detalhes sobre o projeto, clique aqui ou simplesmente vá até o arquivo DOCUMENTACAO, neste mesmo diretório.](DOCUMENTACAO.pdf)
 
 ## Integrantes do Grupo
 - **Marco Antônio de Alcântara Machado**  
@@ -60,13 +61,14 @@ Para testar o shell, navegue até o diretório `shell` e execute:
 ### Parte 2 - MeuTop
 Para usar o `meutop`:
 
-1) Navegue até o diretório `shell`.
+1) Navegue até o diretório `top`.
 
 2) Abra um terminal (que chamaremos de terminal 1), compile e execute o `meutop`:
 ```bash
 gcc meutop.c -o meutop
 ./meutop
 ```
+Para testar o envio de sinais com `tester`:
 
 3) Em outro terminal (que chamaremos de terminal 2), compile e execute o `tester`:
 ```bash
@@ -86,4 +88,4 @@ Isso retornará o PID do `tester` logo após o nome do usuário. Copie esse PID.
 ## Observações
 - O código foi desenvolvido sem o uso da função `system` para manter a implementação conforme solicitado.
 - A Parte 2 utiliza o diretório `/proc` para obter informações dos processos em execução.
-- O código foi testado e validado com o script de teste `grade.sh` e com o `signaltester`.
+- O código foi testado e validado com o script de teste `grade.sh` e com o `tester`.
